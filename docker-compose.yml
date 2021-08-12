@@ -1,0 +1,23 @@
+---
+    version: '3'
+    
+    services:
+      database:
+        image: postgres:13
+        ports:
+            - "13000:5432"
+        environment:
+          POSTGRES_USER: data
+          POSTGRES_PASSWORD: data
+          POSTGRES_DB: data
+        volumes:
+          - data-volume:/var/lib/postgresql/data
+        healthcheck:
+          test: ["CMD", "pg_isready", "-U", "data"]
+          interval: 5s
+          retries: 5
+        restart: always
+    
+    volumes:
+      data-volume:
+    
